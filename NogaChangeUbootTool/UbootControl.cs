@@ -37,6 +37,11 @@ namespace NogaChangeUbootTool
         }
         public void Close()
         {
+            m_running = false;
+            if (m_task != null)
+            {
+                m_task.Wait();
+            }
             m_comm.Close();
         }
         void ParserTask()
@@ -72,6 +77,11 @@ namespace NogaChangeUbootTool
         }
         private void UbootControl_KeyDown(object sender, KeyEventArgs e)
         {
+
+        }
+
+        void OpenSettings()
+        {
             m_db.Load(m_fileName);
             UbootSettingsForm f = new UbootSettingsForm(m_db.Config);
             if (f.ShowDialog() == DialogResult.OK)
@@ -89,6 +99,7 @@ namespace NogaChangeUbootTool
                 }
                 m_db.Save();
             }
+
         }
 
         public void NotifyRead(byte[] data, int size)
@@ -99,6 +110,19 @@ namespace NogaChangeUbootTool
         public void NotifyRead(string line)
         {
             m_queue.Enqueue(line);
+        }
+
+        private void txtOutput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                OpenSettings();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (m_comm.IsOpen() == true)
+                    m_comm.SendEnter();
+            }
         }
     }
 }

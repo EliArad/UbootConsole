@@ -22,6 +22,9 @@ namespace NogaChangeUbootTool
             var ports = SerialPort.GetPortNames();
             cmbComPort.DataSource = ports;
 
+            this.KeyPreview = true;
+            this.KeyDown += UbootSettingsForm_KeyDown;
+
 
             cmbComPort.Text = config.ComPort;
             txtStopString.Text = config.StopString;
@@ -41,6 +44,14 @@ namespace NogaChangeUbootTool
             cmbParity.SelectedIndex = (int)config.parity;
 
 
+        }
+
+        private void UbootSettingsForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
         }
 
         public UbootConsoleConfig GetConfig()

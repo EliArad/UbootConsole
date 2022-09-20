@@ -29,6 +29,12 @@ namespace NogaChangeUbootTool
 
             this.KeyPreview = true;
             this.KeyDown += Form1_KeyDown;
+            this.FormClosing += Form1_FormClosing;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CloseAll();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
