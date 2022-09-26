@@ -313,35 +313,35 @@ namespace InvokersLib
             }
         }
 
-        public static void InvokeControlAppendText(Control control, string e)
+        public static void InvokeControlAppendText(TextBox control, string e)
         {
 
             if (control.InvokeRequired)
             {
                 control.BeginInvoke((MethodInvoker)delegate ()
                 {
-                    control.Text += e;
+                    control.AppendText(e);
                 });
             }
             else
             {
-                control.Text += e;
+                control.AppendText(e);
             }
         }
 
-        public static void InvokeControlAppendText2(Control control, string e)
+        public static void InvokeControlAppendText2(TextBox control, string e)
         {
 
             if (control.InvokeRequired)
             {
                 control.BeginInvoke((MethodInvoker)delegate ()
                 {
-                    control.Text += e + Environment.NewLine;
+                    control.AppendText(e + Environment.NewLine);
                 });
             }
             else
             {
-                control.Text += e + Environment.NewLine;
+                control.AppendText(e + Environment.NewLine);
             }
         }
         public static void InvokeControlText(Control control, string e)
